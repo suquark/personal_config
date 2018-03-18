@@ -38,6 +38,7 @@ set -g prefix C-a
 bind C-a send-prefix
 unbind C-b
 EOT
+tmux source-file ~/.tmux.conf
 
 # oh-my-zsh
 sh -c "$(wget https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)"
