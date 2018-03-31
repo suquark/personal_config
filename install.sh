@@ -1,3 +1,28 @@
+echo "Configuring tmux..."
+
+# tmux
+cat <<EOT > ~/.tmux.conf
+# remap prefix to Control + a
+set -g prefix C-a
+# bind 'C-a C-a' to type 'C-a'
+bind C-a send-prefix
+unbind C-b
+EOT
+tmux source-file ~/.tmux.conf
+
+echo "Installing oh-my-zsh..."
+
+# oh-my-zsh
+sh -c "$(wget https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)"
+
+echo "Installing vimrc..."
+
+# vimrc
+git clone --depth=1 https://github.com/amix/vimrc.git ~/.vim_runtime
+sh ~/.vim_runtime/install_awesome_vimrc.sh
+
+echo "Installing Unix command line tools..."
+
 # from https://stackoverflow.com/questions/394230/how-to-detect-the-os-from-a-bash-script
 if [[ "$OSTYPE" == "linux-gnu" ]]; then
     declare -A osInfo;
@@ -29,20 +54,3 @@ elif [[ "$OSTYPE" == "freebsd"* ]]; then
 else
     # Unknown.
 fi
-
-# tmux
-cat <<EOT > ~/.tmux.conf
-# remap prefix to Control + a
-set -g prefix C-a
-# bind 'C-a C-a' to type 'C-a'
-bind C-a send-prefix
-unbind C-b
-EOT
-tmux source-file ~/.tmux.conf
-
-# oh-my-zsh
-sh -c "$(wget https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)"
-
-# vimrc
-git clone --depth=1 https://github.com/amix/vimrc.git ~/.vim_runtime
-sh ~/.vim_runtime/install_awesome_vimrc.sh
